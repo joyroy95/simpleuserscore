@@ -1,11 +1,14 @@
 package com.api.simpleuserscore.service;
 
+import com.api.simpleuserscore.dto.LeaderBoardDto;
 import com.api.simpleuserscore.entity.User;
 import com.api.simpleuserscore.entity.UserProgress;
 import com.api.simpleuserscore.repository.UserProgressRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -45,6 +48,28 @@ public class UserProgressServiceImpl implements UserProgressService{
             throw new RuntimeException("User progress id did not found - " + theId);
         }
         return userProgress;
-
     }
+
+    @Override
+    public List<LeaderBoardDto> findTopTenScored() {
+        return userProgressRepository.findTop10ByOrderByScoreDesc(PageRequest.of(0,10));
+    }
+
+    @Override
+    public LeaderBoardDto findUserScoreByUserId(long userId) {
+        Optional<LeaderBoardDto> leaderBoardDtoOptional= userProgressRepository.findUserScoreByUserId(userId);
+
+        LeaderBoardDto leaderBoardDto = null;
+        if(leaderBoardDtoOptional.isPresent())
+        {
+            leaderBoardDto = leaderBoardDtoOptional.get();
+        }
+        else
+        {
+            throw new RuntimeException("User id did not found - " + userId);
+        }
+        return leaderBoardDto;
+    }
+
+
 }

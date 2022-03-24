@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class UserController {
 
-    public final UserService userService;
+    private final UserService userService;
 
     // add mapping for GET single user
     @GetMapping("/users/{userId}")
