@@ -52,7 +52,7 @@ public class UserProgressServiceImpl implements UserProgressService{
 
     @Override
     public List<LeaderBoardDto> findTopTenScored() {
-        return userProgressRepository.findTop10ByOrderByScoreDesc(PageRequest.of(0,10));
+            return userProgressRepository.findTop10ByOrderByScoreDesc(PageRequest.of(0,10));
     }
 
     @Override
