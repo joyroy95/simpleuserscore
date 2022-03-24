@@ -1,6 +1,7 @@
 package com.api.simpleuserscore.service;
 
 import com.api.simpleuserscore.entity.User;
+import com.api.simpleuserscore.error.UserNotFoundException;
 import com.api.simpleuserscore.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService{
         }
         else
         {
-            throw new RuntimeException("User id did not found - " + theId);
+            throw new UserNotFoundException("User id did not found - " + theId);
         }
         return user;
     }

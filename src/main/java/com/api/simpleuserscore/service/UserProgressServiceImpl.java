@@ -1,8 +1,8 @@
 package com.api.simpleuserscore.service;
 
 import com.api.simpleuserscore.dto.LeaderBoardDto;
-import com.api.simpleuserscore.entity.User;
 import com.api.simpleuserscore.entity.UserProgress;
+import com.api.simpleuserscore.error.UserNotFoundException;
 import com.api.simpleuserscore.repository.UserProgressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -45,7 +45,7 @@ public class UserProgressServiceImpl implements UserProgressService{
         }
         else
         {
-            throw new RuntimeException("User progress id did not found - " + theId);
+            throw new UserNotFoundException("User progress id did not found - " + theId);
         }
         return userProgress;
     }
@@ -66,7 +66,7 @@ public class UserProgressServiceImpl implements UserProgressService{
         }
         else
         {
-            throw new RuntimeException("User id did not found - " + userId);
+            throw new UserNotFoundException("User id did not found - " + userId);
         }
         return leaderBoardDto;
     }
